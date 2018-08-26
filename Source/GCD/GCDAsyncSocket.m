@@ -2032,7 +2032,7 @@ enum GCDAsyncSocketConfig
 	{
 		__strong id theDelegate = delegate;
 		
-		dispatch_async(delegateQueue, ^{ @autoreleasepool {
+		dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 			
 			// Query delegate for custom socket queue
 			
@@ -2997,7 +2997,7 @@ enum GCDAsyncSocketConfig
 	{
 		SetupStreamsPart1();
 		
-		dispatch_async(delegateQueue, ^{ @autoreleasepool {
+		dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 			
 			[theDelegate socket:self didConnectToHost:host port:port];
 			
@@ -3011,7 +3011,7 @@ enum GCDAsyncSocketConfig
 	{
 		SetupStreamsPart1();
 		
-		dispatch_async(delegateQueue, ^{ @autoreleasepool {
+		dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 			
 			[theDelegate socket:self didConnectToUrl:url];
 			
@@ -3317,7 +3317,7 @@ enum GCDAsyncSocketConfig
 		
 		if (delegateQueue && [theDelegate respondsToSelector: @selector(socketDidDisconnect:withError:)])
 		{
-			dispatch_async(delegateQueue, ^{ @autoreleasepool {
+			dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidDisconnect:theSelf withError:error];
 			}});
@@ -5617,7 +5617,7 @@ enum GCDAsyncSocketConfig
 
 			if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidCloseReadStream:)])
 			{
-				dispatch_async(delegateQueue, ^{ @autoreleasepool {
+				dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 					
 					[theDelegate socketDidCloseReadStream:self];
 				}});
@@ -7255,7 +7255,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 		if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidSecure:)])
 		{
-			dispatch_async(delegateQueue, ^{ @autoreleasepool {
+			dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidSecure:self];
 			}});
@@ -7309,7 +7309,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 		if (delegateQueue && [theDelegate respondsToSelector:@selector(socket:didReceiveTrust:completionHandler:)])
 		{
-			dispatch_async(delegateQueue, ^{ @autoreleasepool {
+			dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 			
 				[theDelegate socket:self didReceiveTrust:trust completionHandler:comletionHandler];
 			}});
@@ -7393,7 +7393,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 		if (delegateQueue && [theDelegate respondsToSelector:@selector(socketDidSecure:)])
 		{
-			dispatch_async(delegateQueue, ^{ @autoreleasepool {
+			dispatch_barrier_async(delegateQueue, ^{ @autoreleasepool {
 				
 				[theDelegate socketDidSecure:self];
 			}});
